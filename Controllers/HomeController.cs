@@ -2,7 +2,7 @@
 using SimpleCRUD_MVC.Business.Models;
 using System.Diagnostics;
 
-namespace SimpleCRUD_MVC.Presentation.Controllers
+namespace SimpleCRUD_MVC.Controllers
 {
     public class HomeController : Controller
     {

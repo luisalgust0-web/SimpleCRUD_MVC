@@ -1,5 +1,4 @@
 using SimpleCRUD_MVC.Data;
-using MySql;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,6 +33,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "/{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
