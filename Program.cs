@@ -1,7 +1,19 @@
+using SimpleCRUD_MVC.Data;
+using MySql;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
+
+string connectionString = builder.Configuration.GetConnectionString("KeyDatabaseMySQL");
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.AddDbContext<SimpleCRUD_MVCContext>(options =>
+        options.UseMySql(connectionString,
+        ServerVersion.AutoDetect(connectionString)
+        )
+    );
 
 var app = builder.Build();
 
