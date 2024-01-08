@@ -1,12 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using System.ComponentModel.DataAnnotations.Schema;
-
-namespace SimpleCRUD_MVC.Data.Models
+﻿namespace SimpleCRUD_MVC.Business.Models.Output
 {
-    public class Client
+    public class ClientOutput
     {
-        [Key]
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }

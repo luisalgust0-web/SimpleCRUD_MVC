@@ -37,9 +37,8 @@ namespace SimpleCRUD_MVC.Data.Repositorys
             return _context.Set<T>().Find(id);
         }
 
-        public bool Update(int id)
+        public bool Update(T entity)
         {
-            T entity =_context.Set<T>().Find(id);
             _context.Set<T>().Update(entity);
             _context.SaveChanges();
             return true;

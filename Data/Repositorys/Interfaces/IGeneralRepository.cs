@@ -3,7 +3,7 @@
     public interface IGeneralRepository<T> 
     {
         public bool Add(T entity);
-        public bool Update(int id);
+        public bool Update(T entity);
         public bool Delete(int id);
         public List<T> GetAll();
         public T GetById(int id);

@@ -1,5 +1,7 @@
 using SimpleCRUD_MVC.Data;
 using Microsoft.EntityFrameworkCore;
+using SimpleCRUD_MVC.MapperProfiles;
+using SimpleCRUD_MVC.Configurations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -7,6 +9,11 @@ string connectionString = builder.Configuration.GetConnectionString("KeyDatabase
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+builder.Services.Configuration();
+
+builder.Services.AddAutoMapper(
+    cfg => cfg.AddProfile<Profiles>());
 
 builder.Services.AddDbContext<SimpleCRUD_MVCContext>(options =>
         options.UseMySql(connectionString,
