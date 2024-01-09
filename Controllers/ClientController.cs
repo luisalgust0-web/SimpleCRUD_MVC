@@ -9,9 +9,9 @@ namespace SimpleCRUD_MVC.Controllers
 {
     public class ClientController : Controller
     {
-        private readonly IGeneralService<Client> _generalService;
+        private readonly IBaseService<Client> _generalService;
 
-        public ClientController(IGeneralService<Client> generalService)
+        public ClientController(IBaseService<Client> generalService)
         {
             _generalService = generalService;
         }

@@ -15,10 +15,10 @@
                 @Html.DisplayNameFor(model => model.Description)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Image)
+                @Html.DisplayNameFor(model => model.Disponibility)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Disponibility)
+                @Html.DisplayNameFor(model => model.ImageProduct)
             </th>
             <th></th>
         </tr>
@@ -33,10 +33,14 @@
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Image)
-            </td>
-            <td>
                 @Html.DisplayFor(modelItem => item.Disponibility)
+            </td>
+                 <td>
+                 @{
+                     var base64 = Convert.ToBase64String(item.ImageProduct);
+                     var imgSrc = String.Format("data:image/gif;base64,{0}", base64);
+                  }
+                 <img src='@imgSrc' style="max-width:100px; max-height:100px;" />
             </td>
             <td>
                     <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Edit</button></a> |

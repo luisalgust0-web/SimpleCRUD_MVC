@@ -11,9 +11,9 @@ namespace SimpleCRUD_MVC.Controllers
 {
     public class HomeController : Controller
     {
-        private readonly IGeneralService<Client> _service;
+        private readonly IBaseService<Client> _service;
 
-        public HomeController(IGeneralService<Client> service)
+        public HomeController(IBaseService<Client> service)
         {
             _service = service;
         }

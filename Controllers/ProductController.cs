@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SimpleCRUD_MVC.Business.Models.Input;
 using SimpleCRUD_MVC.Business.Models.Output;
+using SimpleCRUD_MVC.Business.Services;
 using SimpleCRUD_MVC.Business.Services.Interfaces;
 using SimpleCRUD_MVC.Data.Models;
 
@@ -10,24 +11,24 @@ namespace SimpleCRUD_MVC.Controllers
 {
     public class ProductController : Controller
     {
-        private readonly IGeneralService<Product> _generalService;
+        private readonly ProductService _service;
 
-        public ProductController(IGeneralService<Product> generalService)
+        public ProductController(ProductService service)
         {
-            _generalService = generalService;
+            _service = service;
         }
 
         // GET: ProductController
         public ActionResult Index()
         {
-            List<ProductOutput> outputList = _generalService.GetAll<ProductOutput>();
+            List<ProductOutput> outputList = _service.GetAll<ProductOutput>(x => x.ProductImage);
             return View(outputList);
         }
 
         // GET: ProductController/Details/5
         public ActionResult Details(int id)
         {
-            ProductOutput productOutput = _generalService.GetById<ProductOutput>(id);
+            ProductOutput productOutput = _service.GetById<ProductOutput>(id);
             return View(productOutput);
         }
 
@@ -50,7 +51,7 @@ namespace SimpleCRUD_MVC.Controllers
             {
                 try
                 {
-                    _generalService.Add(input);
+                    _service.Add(input);
                     return RedirectToAction(nameof(Index));
                 }
                 catch
@@ -63,7 +64,7 @@ namespace SimpleCRUD_MVC.Controllers
         // GET: ProductController/Edit/5
         public ActionResult Edit(int id)
         {
-            ProductInput input = _generalService.GetById<ProductInput>(id);
+            ProductInput input = _service.GetById<ProductInput>(id);
             return View(input);
         }
 
@@ -80,7 +81,7 @@ namespace SimpleCRUD_MVC.Controllers
             {
                 try
                 {
-                    _generalService.Update(input);
+                    _service.Update(input);
                     return RedirectToAction(nameof(Index));
                 }
                 catch
@@ -93,7 +94,7 @@ namespace SimpleCRUD_MVC.Controllers
         // GET: ProductController/Delete/5
         public ActionResult Delete(int id)
         {
-            ProductOutput output = _generalService.GetById<ProductOutput>(id);
+            ProductOutput output = _service.GetById<ProductOutput>(id);
             return View(output);
         }
 
@@ -104,7 +105,7 @@ namespace SimpleCRUD_MVC.Controllers
         {
             try
             {
-                _generalService.Delete(id);
+                _service.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch

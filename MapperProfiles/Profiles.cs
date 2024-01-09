@@ -10,7 +10,7 @@ namespace SimpleCRUD_MVC.MapperProfiles
         public Profiles()
         {
             CreateMap<ProductInput, Product>();
-            CreateMap<Product, ProductOutput>();
+            CreateMap<Product, ProductOutput>().ForMember( x => x.ImageProduct, cfg => cfg.MapFrom(src => src.ProductImage.Imagem));
 
             CreateMap<ClientInput, Client>();
             CreateMap<Client, ClientInput>();
