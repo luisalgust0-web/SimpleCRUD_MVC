@@ -1,13 +1,6 @@
 ﻿@model SimpleCRUD_MVC.Business.Models.Output.ClientOutput
-
-@{
-    ViewData["Title"] = "Details";
-}
-
-<h1>Details</h1>
-
+<h3>@Model.FirstName @Model.LastName</h3>
 <div>
-    <h4>ClientOutput</h4>
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
@@ -43,6 +36,6 @@
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model?.Id"><Button class="btn btn-primary">Edit</Button></a> |
+    <a asp-action="Index"><button class="btn btn-primary">Back to List</button></></a>
 </div>

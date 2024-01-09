@@ -13,6 +13,7 @@ namespace SimpleCRUD_MVC.MapperProfiles
             CreateMap<Product, ProductOutput>();
 
             CreateMap<ClientInput, Client>();
+            CreateMap<Client, ClientInput>();
             CreateMap<Client, ClientOutput>();
 
             CreateMap<OrderInput, Order>();

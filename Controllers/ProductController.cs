@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using SimpleCRUD_MVC.Business.Models.Input;
 using SimpleCRUD_MVC.Business.Models.Output;
 using SimpleCRUD_MVC.Business.Services.Interfaces;
@@ -10,6 +11,11 @@ namespace SimpleCRUD_MVC.Controllers
     public class ProductController : Controller
     {
         private readonly IGeneralService<Product> _generalService;
+
+        public ProductController(IGeneralService<Product> generalService)
+        {
+            _generalService = generalService;
+        }
 
         // GET: ProductController
         public ActionResult Index()
@@ -36,22 +42,29 @@ namespace SimpleCRUD_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ProductInput input)
         {
-            try
-            {
-                _generalService.Add(input);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (!ModelState.IsValid)
             {
                 return View(input);
+            }
+            else
+            {
+                try
+                {
+                    _generalService.Add(input);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View(input);
+                }
             }
         }
 
         // GET: ProductController/Edit/5
         public ActionResult Edit(int id)
         {
-            ProductOutput output = _generalService.GetById<ProductOutput>(id);
-            return View(output);
+            ProductInput input = _generalService.GetById<ProductInput>(id);
+            return View(input);
         }
 
         // POST: ProductController/Edit/5
@@ -59,14 +72,21 @@ namespace SimpleCRUD_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(ProductInput input)
         {
-            try
-            {
-                _generalService.Update(input);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (!ModelState.IsValid) 
             {
                 return View(input);
+            }
+            else
+            {
+                try
+                {
+                    _generalService.Update(input);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View(input);
+                }
             }
         }
 

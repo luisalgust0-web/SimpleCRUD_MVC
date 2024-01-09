@@ -41,22 +41,29 @@ namespace SimpleCRUD_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ClientInput input)
         {
-            try
-            {
-                _generalService.Add(input);
-                return RedirectToAction(nameof(Index));
-            }
-            catch(Exception ex)
+            if (!ModelState.IsValid)
             {
                 return View(input);
+            }
+            else
+            {
+                try
+                {
+                    _generalService.Add(input);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (Exception ex)
+                {
+                    return View(input);
+                }
             }
         }
 
         // GET: ClientController/Edit/5
         public ActionResult Edit(int id)
         {
-            ClientOutput clientOutput = _generalService.GetById<ClientOutput>(id);
-            return View(clientOutput);
+            ClientInput clientInput= _generalService.GetById<ClientInput>(id);
+            return View(clientInput);
         }
 
         // POST: ClientController/Edit/5
@@ -64,14 +71,21 @@ namespace SimpleCRUD_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Edit(int id, ClientInput input)
         {
-            try
-            {
-                _generalService.Update(input);
-                return RedirectToAction(nameof(Index));
-            }
-            catch
+            if (!ModelState.IsValid)
             {
                 return View(input);
+            }
+            else
+            {
+                try
+                {
+                    _generalService.Update(input);
+                    return RedirectToAction(nameof(Index));
+                }
+                catch
+                {
+                    return View(input);
+                }
             }
         }
 
