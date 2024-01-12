@@ -2,7 +2,7 @@
 
 namespace SimpleCRUD_MVC.Business.Models.Output
 {
-    public class ClientOutput
+    public class ClientOutput 
     {
         public int Id { get; set; }
         [DisplayName("First Name")]

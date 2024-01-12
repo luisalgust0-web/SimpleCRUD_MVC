@@ -37,7 +37,19 @@
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
+
+        @if(TempData["AlertMessage"] != null)
+        {
+            <div class="alert @TempData["AlertType"] alert-dismissible fade show" role="alert">
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                @TempData["AlertMessage"]
+            </div>
+        }
+
     </div>
+
+
+
 
     <footer class="border-top footer text-muted">
         <div class="container">

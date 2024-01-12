@@ -5,11 +5,12 @@ using SimpleCRUD_MVC.Business.Models.Input;
 using SimpleCRUD_MVC.Business.Models.Output;
 using SimpleCRUD_MVC.Business.Services;
 using SimpleCRUD_MVC.Business.Services.Interfaces;
+using SimpleCRUD_MVC.Controllers.Base;
 using SimpleCRUD_MVC.Data.Models;
 
 namespace SimpleCRUD_MVC.Controllers
 {
-    public class ProductController : Controller
+    public class ProductController : BaseController
     {
         private readonly ProductService _service;
 
@@ -52,10 +53,12 @@ namespace SimpleCRUD_MVC.Controllers
                 try
                 {
                     _service.Add(input);
+                    Alert(AlertType.sucess, "Product added successfully");
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    Alert(AlertType.error, "Error adding product");
                     return View(input);
                 }
             }
@@ -82,10 +85,12 @@ namespace SimpleCRUD_MVC.Controllers
                 try
                 {
                     _service.Update(input);
+                    Alert(AlertType.sucess, "Product edited successfully");
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    Alert(AlertType.error, "Error when editing product");
                     return View(input);
                 }
             }
@@ -106,10 +111,12 @@ namespace SimpleCRUD_MVC.Controllers
             try
             {
                 _service.Delete(id);
+                Alert(AlertType.sucess, "Product deleted successfully");
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                Alert(AlertType.error, "Error deleting product");
                 return View(output);
             }
         }

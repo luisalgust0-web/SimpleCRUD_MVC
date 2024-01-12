@@ -11,6 +11,7 @@ namespace SimpleCRUD_MVC.Configurations
         {
             serviceCollection.AddScoped(typeof(IBaseService<>), typeof(BaseService<>));
             serviceCollection.AddScoped<ProductService, ProductService>();
+            serviceCollection.AddScoped<OrderItemService, OrderItemService>();
             return serviceCollection;
         }
     }

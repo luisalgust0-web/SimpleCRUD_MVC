@@ -1,16 +1,18 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SimpleCRUD_MVC.Business.Models;
 using SimpleCRUD_MVC.Business.Models.Input;
 using SimpleCRUD_MVC.Business.Models.Output;
 using SimpleCRUD_MVC.Business.Services.Interfaces;
+using SimpleCRUD_MVC.Controllers.Base;
 using SimpleCRUD_MVC.Data.Models;
 
 namespace SimpleCRUD_MVC.Controllers
 {
-    public class ClientController : Controller
+    public class ClientController : BaseController
     {
         private readonly IBaseService<Client> _generalService;
-
+        
         public ClientController(IBaseService<Client> generalService)
         {
             _generalService = generalService;
@@ -50,10 +52,12 @@ namespace SimpleCRUD_MVC.Controllers
                 try
                 {
                     _generalService.Add(input);
+                    Alert(AlertType.sucess, "Client added successfully");
                     return RedirectToAction(nameof(Index));
                 }
                 catch (Exception ex)
                 {
+                    Alert(AlertType.error, "Error adding client");
                     return View(input);
                 }
             }
@@ -80,10 +84,12 @@ namespace SimpleCRUD_MVC.Controllers
                 try
                 {
                     _generalService.Update(input);
+                    Alert(AlertType.sucess, "Client edited successfully");
                     return RedirectToAction(nameof(Index));
                 }
                 catch
                 {
+                    Alert(AlertType.error, "Error when editing client");
                     return View(input);
                 }
             }
@@ -104,10 +110,12 @@ namespace SimpleCRUD_MVC.Controllers
             try
             {
                 _generalService.Delete(id);
+                Alert(AlertType.sucess, "Client deleted successfully");
                 return RedirectToAction(nameof(Index));
             }
             catch
             {
+                Alert(AlertType.error, "Error deleting client");
                 return View(output);
             }
         }

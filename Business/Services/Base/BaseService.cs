@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Components.Forms;
 using Microsoft.EntityFrameworkCore;
 using SimpleCRUD_MVC.Business.Services.Interfaces;
 using SimpleCRUD_MVC.Data;
+using System.Linq;
 using System.Linq.Expressions;
 
 namespace SimpleCRUD_MVC.Business.Services.Base
@@ -56,6 +57,18 @@ namespace SimpleCRUD_MVC.Business.Services.Base
         public Output GetById<Output>(int id)
         {
             T entity = _context.Set<T>().Find(id);
+            return _mapper.Map<Output>(entity);
+        }
+
+        public Output GetById<Output>(Expression<Func<T, bool>> Wherefunc, Expression<Func<T, object>> Includefunc)
+        {
+            T entity = _context.Set<T>().Include(Includefunc).Where(Wherefunc).FirstOrDefault();
+            return _mapper.Map<Output>(entity);
+        }
+
+        public Output GetById<Output>(Expression<Func<T, bool>> Wherefunc, Expression<Func<T, object>> Includefunc, Expression<Func<T, object>> Includefunc2)
+        {
+            T entity = _context.Set<T>().Include(Includefunc).Include(Includefunc2).Where(Wherefunc).FirstOrDefault();
             return _mapper.Map<Output>(entity);
         }
 

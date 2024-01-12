@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace SimpleCRUD_MVC.Business.Models.Input
 {
-    public class ClientInput
+    public class ClientInput 
     {
         public int? Id { get; set; }
         [Required]

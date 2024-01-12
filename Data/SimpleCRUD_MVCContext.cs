@@ -14,5 +14,9 @@ namespace SimpleCRUD_MVC.Data
         public DbSet<Order> Order { get; set; }
         public DbSet<OrderItem> OrderItem { get; set; }
         public DbSet<ProductImage> ProductImagem { get; set; }
+        public DbSet<SimpleCRUD_MVC.Business.Models.Output.OrderOutput>? OrderOutput { get; set; }
+        public DbSet<SimpleCRUD_MVC.Business.Models.Input.OrderInput>? OrderInput { get; set; }
+        public DbSet<SimpleCRUD_MVC.Business.Models.Output.OrderItemOutput>? OrderItemOutput { get; set; }
+        public DbSet<SimpleCRUD_MVC.Business.Models.Input.OrderItemInput>? OrderItemInput { get; set; }
     }
 }
