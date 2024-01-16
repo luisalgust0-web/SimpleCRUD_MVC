@@ -34,7 +34,7 @@ namespace SimpleCRUD_MVC.Business.Services.Base
             return entity;
         }
 
-        public bool Delete(int id)
+        public virtual bool Delete(int id)
         {
             T entity = _context.Set<T>().Find(id);
             _context.Remove(entity);

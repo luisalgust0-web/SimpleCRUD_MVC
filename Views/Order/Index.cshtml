@@ -1,11 +1,8 @@
 ﻿@model IEnumerable<SimpleCRUD_MVC.Business.Models.Output.OrderOutput>
 
 
-<h1>Clients</h1>
+<h1>Orders</h1>
 
-<p>
-    <a asp-action="Create"><button class="btn btn-primary">Create New</button></a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -36,7 +33,7 @@
                     @Html.DisplayFor(modelItem => item.ClientLastName)
                 </td>
                 <td>
-                    <a asp-action="Index" asp-controller="OrderItem" asp-route-orderId="@item.Id"><button class="btn btn-primary">Add product to this order</button></a>
+                    <a asp-action="Index" asp-controller="OrderItem" asp-route-orderId="@item.Id"><button class="btn btn-primary">See the products of this order</button></a>
                 </td>
                 <td>
                     <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Edit</button></a> |
@@ -47,3 +44,5 @@
         }
     </tbody>
 </table>
+
+<a asp-action="Create" class="d-grid gap-2"><button class="btn btn-primary">New Order</button></a>

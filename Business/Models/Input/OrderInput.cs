@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace SimpleCRUD_MVC.Business.Models.Input
@@ -8,6 +9,7 @@ namespace SimpleCRUD_MVC.Business.Models.Input
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
+        [DisplayName("Client")]
         public int ClientId { get; set; }
     }
 }
