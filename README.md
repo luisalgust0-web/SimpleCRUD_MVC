@@ -12,7 +12,7 @@ DIVISÃO DAS PASTAS:
 
  -Data: Se encontra a classe Context e os models que representam os modelos do DB.
 
- -MapperProfiles: Contem a classe profiles onde configuramos os Maps que o AutoMapper ira utilizar ao realizar o mapeamento de uma classe a outra.
+ -MaperProfiles: Contem a classe profiles onde configuramos os Maps que o AutoMapper ira utilizar ao realizar o mapeamento de uma classe a outra.
 
  -Migrations: Contém o historico de migraçoes do proeto com seus ups e downs
 
