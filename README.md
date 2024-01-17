@@ -1,34 +1,36 @@
 # SimpleCRUD_MVC
 
-Este projeto È um CRUD simples realizado seguindo o padr„o MVC
+Este projeto √© um CRUD simples realizado seguindo o padr√£o MVC
 
-DIVIS√O DAS PASTAS: 
+DIVIS√ÉO DAS PASTAS: 
 
- -Business: Se encontra as partes do negocio do projeto como os serviÁos e suas interfaces e os inputModelViews e os outputModelViews.
+ -Business: Se encontra as partes do negocio do projeto como os servi√ßos e suas interfaces e os inputModelViews e os outputModelViews.
 
- -Configuration: Contem a classe ServiceConfiguration que conta com um mÈtodo de extens„o Configuration onde todos os services s„o adicionados.
+ -Configuration: Contem a classe ServiceConfiguration que conta com um m√©todo de extens√£o Configuration onde todos os services s√£o adicionados.
 
- -Controllers: contÈm os controllers do projeto.
+ -Controllers: cont√©m os controllers do projeto.
 
  -Data: Se encontra a classe Context e os models que representam os modelos do DB.
 
  -MapperProfiles: Contem a classe profiles onde configuramos os Maps que o AutoMapper ira utilizar ao realizar o mapeamento de uma classe a outra.
 
- -Migrations: ContÈm o historico de migraÁoes do proeto com seus ups e downs
+ -Migrations: Cont√©m o historico de migra√ßoes do proeto com seus ups e downs
 
  -View: Contem as views de cada controller
 
 SERVICES:
 
- 1 - Os services foram implementado utilizando o conceito de Generics onde se tem um serviÁo base(BaseService) que recebe um tipo generico(T) e possui mÈtodos basicos que ser„o utilizados por varias entidades;
+ 1 - Os services foram implementado utilizando o conceito de Generics onde se tem um servi√ßo base(BaseService) que recebe um tipo generico(T) e possui m√©todos basicos que ser√£o utilizados por varias entidades;
 
- 2 - O conceito de heranÁa tambÈm foi aplicado em casos onde uma rotina de instruÁıes peculiar deve ser executada criando classes service que herdam de BaseService e sobrescrevem algum mÈtodo especifico.
+ 2 - O conceito de heran√ßa tamb√©m foi aplicado em casos onde uma rotina de instru√ß√µes peculiar deve ser executada criando classes service que herdam de BaseService e sobrescrevem algum m√©todo especifico.
 
   //Exemplo retirado da classe ProductServie:
 
-   public class ProductService : BaseService<Product>
-{
-    private readonly IBaseService<ProductImage> _productImageService;
+    public class ProductService : BaseService<Product>
+    
+    {
+     
+     private readonly IBaseService<ProductImage> _productImageService;
 
     public ProductService(IMapper mapper, SimpleCRUD_MVCContext context, IBaseService<ProductImage> productImageService) : base(mapper, context)
     {
@@ -58,18 +60,18 @@ SERVICES:
     }
 }
 
- 3 - O conceito de sobrecarga de mÈtodos tambÈm foi aplicado onde mÈtodos com mesmo nome e mesmo retorno foram escritos porÈm com paramentros diferentes 
+ 3 - O conceito de sobrecarga de m√©todos tamb√©m foi aplicado onde m√©todos com mesmo nome e mesmo retorno foram escritos por√©m com paramentros diferentes 
  
-  //A baixo dois mÈtodos com mesmo nome e retorno porÈm que recebem parametros diferentes:
-  
+//A baixo dois m√©todos com mesmo nome e retorno por√©m que recebem parametros diferentes:
+
 public List<Output> GetAll<Output>(Expression<Func<T, object>> func)
-{
+ {
     List<T> listEntitys = _context.Set<T>().Include(func).ToList();
     return _mapper.Map<List<Output>>(listEntitys);
-}
+ }
 
-public List<Output> GetAll<Output>()
-{
+ public List<Output> GetAll<Output>()
+ {
     List<T> listEntitys = _context.Set<T>().ToList();
     return _mapper.Map<List<Output>>(listEntitys);
 }
@@ -77,9 +79,9 @@ public List<Output> GetAll<Output>()
 
 CONFIGURATIONS:
  
- 1 - A pasta Configurations que contÈm a classe ServiceConfiguration que centraliza todos os serviÁos que ser„o configurados no Program.cs atravÈs de um mÈtodo de extens„o que retorna um IServiceCollection e recebe tambÈm a mesma instancia de IServiceCollection
+ 1 - A pasta Configurations que cont√©m a classe ServiceConfiguration que centraliza todos os servi√ßos que ser√£o configurados no Program.cs atrav√©s de um m√©todo de extens√£o que retorna um IServiceCollection e recebe tamb√©m a mesma instancia de IServiceCollection
  
- //MÈtodo de extens„o Configuration:
+ //M√©todo de extens√£o Configuration:
 
 public static IServiceCollection Configuration(this IServiceCollection serviceCollection) 
 {
@@ -90,9 +92,9 @@ public static IServiceCollection Configuration(this IServiceCollection serviceCo
 }
 
 CONTROLLERS: 
- 1 - Na pasta controllers possui uma outra pasta Base que contÈm um BaseController onde est· localizado um metÛdo Alert que dispara um alert bootstrap de sucesso ou erro.
+ 1 - Na pasta controllers possui uma outra pasta Base que cont√©m um BaseController onde est√° localizado um met√≥do Alert que dispara um alert bootstrap de sucesso ou erro.
 
- //MÈtodo Alert presente no BaseController:
+ //M√©todo Alert presente no BaseController:
  
 public void Alert(AlertType alertType,string message)
     {
@@ -111,19 +113,19 @@ public void Alert(AlertType alertType,string message)
     }
 }
 
-2 - Esse controller sera herdado por todos os outros controllers visando que o mÈtodo alert sera utilizado para comunicar ao usuario se uma operaÁ„o foi bem sucedida ou n„o.
+2 - Esse controller sera herdado por todos os outros controllers visando que o m√©todo alert sera utilizado para comunicar ao usuario se uma opera√ß√£o foi bem sucedida ou n√£o.
 
- //Exemplo da heranÁa de todos os controllers criados neste projeto:
+ //Exemplo da heran√ßa de todos os controllers criados neste projeto:
 
  public class ClientController : BaseController
 
 MAPPERPROFILES: 
 
-1 - Contem a classe Profiles que herda de Profile do prÛprio AutoMapper onde s„o configurados os Maps de uma classe para outra.
+1 - Contem a classe Profiles que herda de Profile do pr√≥prio AutoMapper onde s√£o configurados os Maps de uma classe para outra.
 
-2 - Alguns Maps s„o mais complexos que outros necessitando especificar algumas propriedades e de onde essa propriedade ira receber a informaÁ„o
+2 - Alguns Maps s√£o mais complexos que outros necessitando especificar algumas propriedades e de onde essa propriedade ira receber a informa√ß√£o
 
- //MÈtodo que cria um map e especifica tambÈm uma propriedade especifica e de onde a informaÁ„o dessa propriedade ser· mapeada: 
+ //M√©todo que cria um map e especifica tamb√©m uma propriedade especifica e de onde a informa√ß√£o dessa propriedade ser√° mapeada: 
  CreateMap<Order, OrderOutput>()
      .ForMember( x => x.ClientLastName, cfg => cfg.MapFrom(src => src.Client.LastName))
      .ForMember( x => x.ClientFirstName, cfg => cfg.MapFrom(src => src.Client.FirstName));
@@ -131,9 +133,9 @@ MAPPERPROFILES:
 
 SHARED - _LAYOUT:
 
-1 - Na Shared _Layout se encontra uma lÛgica que renderiza o alert 
+1 - Na Shared _Layout se encontra uma l√≥gica que renderiza o alert 
 
- //LÛgica para a apresentaÁ„o do alert:
+ //L√≥gica para a apresenta√ß√£o do alert:
  
 @if(TempData["AlertMessage"] != null)
 {
@@ -144,22 +146,22 @@ SHARED - _LAYOUT:
 }
 
 PROGRAM: 
- 1 - Adiciona o serviÁo do autoMapper e indica onde buscar os Maps 
+ 1 - Adiciona o servi√ßo do autoMapper e indica onde buscar os Maps 
 
  //Adicionado o AutoMapper: 
 
  builder.Services.AddAutoMapper(
     cfg => cfg.AddProfile<Profiles>());
 
- 2 - Adiciona os serviÁos do mÈtodo de extenÁ„o criado 
+ 2 - Adiciona os servi√ßos do m√©todo de exten√ß√£o criado 
 
- //Adicionando o mÈtodo de extens„o:
+ //Adicionando o m√©todo de extens√£o:
 
  builder.Services.Configuration()
 
-3 - Uma pequena alteraÁ„o na rota padr„o para que a view default renderizada seja do OrderController
+3 - Uma pequena altera√ß√£o na rota padr√£o para que a view default renderizada seja do OrderController
 
- //Alterando a rota padr„o: 
+ //Alterando a rota padr√£o: 
 
  app.MapControllerRoute(
     name: "default",
