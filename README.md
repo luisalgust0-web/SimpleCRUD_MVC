@@ -76,6 +76,31 @@ SERVICES:
        return _mapper.Map<List<Output>>(listEntitys);
     }
 
+4 - No método productService o conceito de transação foi aplicado atrvés da utilização do TransactionScope onde a transação só é completa após uma seuqencia de código ter sido executada corretamente
+
+ //Método Add em productService que utiliza TransactionScope:
+ 
+    public override Product Add<Input>(Input input)
+    {
+       ProductInput item = input as ProductInput;
+
+       using (TransactionScope scope = new TransactionScope())
+       {
+          Product product = base.Add(input);
+
+          MemoryStream stream = new MemoryStream();
+          ProductImage productImage = new ProductImage();
+
+          item.Image.CopyTo(stream);
+          productImage.Imagem = stream.ToArray();
+          productImage.ProductId = product.Id;
+          _productImageService.Add(productImage);
+
+          scope.Complete();
+
+          return product;
+       }
+    }
 
 CONFIGURATIONS:
  
