@@ -182,8 +182,13 @@ PROGRAM:
 PACOTES UTILIZADOS NO PROJETO:
 
  -AutoMapper.Extensions.Microsoft.DependencyInjection;
- -Microsoft.EntityFrameworkCore
- -Microsoft.EntityFrameworkCore.Design
- -Microsoft.EntityFrameworkCore.Tools
- -Microsoft.VisualStudio.Web.CodeGeneration.Design
- -Pomelo.EntityFrameworkCore.MySql
+ 
+ -Microsoft.EntityFrameworkCore;
+ 
+ -Microsoft.EntityFrameworkCore.Design;
+ 
+ -Microsoft.EntityFrameworkCore.Tools;
+ 
+ -Microsoft.VisualStudio.Web.CodeGeneration.Design;
+ 
+ -Pomelo.EntityFrameworkCore.MySql;
