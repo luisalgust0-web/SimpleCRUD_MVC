@@ -1,28 +1,29 @@
 # SimpleCRUD_MVC
 
-Este projeto é um CRUD simples realizado seguindo o padrão MVC
+Este projeto é um CRUD simples realizado seguindo o padrão MVC.
+O projeto trabalha a persistência com uma imagem do MySql no Docker.
 
 DIVISÃO DAS PASTAS: 
 
- -Business: Se encontra as partes do negocio do projeto como os serviços e suas interfaces e os inputModelViews e os outputModelViews.
+ -Business: Se encontra as regras do negócio do projeto como os serviços e suas interfaces e os inputModelViews e os outputModelViews.
 
- -Configuration: Contem a classe ServiceConfiguration que conta com um método de extensão Configuration onde todos os services são adicionados.
+ -Configuration: Contém a classe ServiceConfiguration que conta com um método de extensão Configuration onde todos os services são adicionados.
 
  -Controllers: contém os controllers do projeto.
 
  -Data: Se encontra a classe Context e os models que representam os modelos do DB.
 
- -MaperProfiles: Contem a classe profiles onde configuramos os Maps que o AutoMapper ira utilizar ao realizar o mapeamento de uma classe a outra.
+ -MapperProfiles: Contém a classe profiles onde configuramos os Maps que o AutoMapper ira utilizar ao realizar o mapeamento de uma classe para outra.
 
- -Migrations: Contém o historico de migraçoes do proeto com seus ups e downs
+ -Migrations: Contém o historico de migraçoes do projeto com seus ups e downs
 
- -View: Contem as views de cada controller
+ -View: Contém as views de cada controller
 
 SERVICES:
 
-1 - Os services foram implementado utilizando o conceito de Generics onde se tem um serviço base(BaseService) que recebe um tipo generico(T) e possui métodos basicos que serão utilizados por varias entidades;
+1 - Os services foram implementado utilizando o conceito de Generics onde se tem um serviço base(BaseService) que recebe um tipo generico(T) e possui métodos básicos que serão reutilizados com várias entidades por meio de injeção de dependência em um controller;
 
-2 - O conceito de herança também foi aplicado em casos onde uma rotina de instruções peculiar deve ser executada criando classes service que herdam de BaseService e sobrescrevem algum método especifico.
+2 - O conceito de herança também foi aplicado em casos onde uma rotina de instruções peculiar deve ser executada criando classes service que herdam de BaseService e sobrescrevem algum método específico.
 
 //Exemplo retirado da classe ProductServie:
 
@@ -59,9 +60,9 @@ SERVICES:
        }
     }
 
-3 - O conceito de sobrecarga de métodos também foi aplicado onde métodos com mesmo nome e mesmo retorno foram escritos porém com paramentros diferentes 
+3 - O conceito de sobrecarga de métodos também foi aplicado onde métodos com mesmo nome e mesmo retorno foram escritos porém com parâmetros diferentes 
  
-//A baixo dois métodos com mesmo nome e retorno porém que recebem parametros diferentes:
+//A baixo dois métodos com mesmo nome e retorno porém que recebem parâmetros diferentes:
 
     public List<Output> GetAll<Output>(Expression<Func<T, object>> func)
     {
@@ -78,7 +79,7 @@ SERVICES:
 
 CONFIGURATIONS:
  
- 1 - A pasta Configurations que contém a classe ServiceConfiguration que centraliza todos os serviços que serão configurados no Program.cs através de um método de extensão que retorna um IServiceCollection e recebe também a mesma instancia de IServiceCollection
+ 1 - A pasta Configurations que contém a classe ServiceConfiguration centraliza todos os serviços que serão configurados no Program.cs através de um método de extensão que retorna um IServiceCollection e também recebe como parâmetro a mesma instância de IServiceCollection;
  
  //Método de extensão Configuration:
 
@@ -92,7 +93,7 @@ CONFIGURATIONS:
 
 CONTROLLERS: 
 
- 1 - Na pasta controllers possui uma outra pasta Base que contém um BaseController onde está localizado um metódo Alert que dispara um alert bootstrap de sucesso ou erro.
+ 1 - Na pasta controllers possui uma outra pasta nomeada Base que contém um BaseController onde está localizado um metódo Alert que dispara um alert bootstrap de sucesso ou erro.
 
  //Método Alert presente no BaseController:
  
@@ -113,7 +114,7 @@ CONTROLLERS:
     }
 
 
-2 - Esse controller sera herdado por todos os outros controllers visando que o método alert sera utilizado para comunicar ao usuario se uma operação foi bem sucedida ou não.
+2 - Esse controller sera herdado por todos os outros controllers visando que o método alert sera utilizado para comunicar ao usuário se uma operação foi bem sucedida ou não.
 
  //Exemplo da herança de todos os controllers criados neste projeto:
 
@@ -134,7 +135,7 @@ MAPERPROFILES:
 
 2 - Alguns Maps são mais complexos que outros necessitando especificar algumas propriedades e de onde essa propriedade ira receber a informação
 
- //Método que cria um map e especifica também uma propriedade especifica e de onde a informação dessa propriedade será mapeada:
+ //Método que cria um map e especifica também uma propriedade e de onde a informação dessa propriedade será mapeada:
  
     CreateMap<Order, OrderOutput>()
         .ForMember( x => x.ClientLastName, cfg => cfg.MapFrom(src => src.Client.LastName))
@@ -177,3 +178,12 @@ PROGRAM:
     app.MapControllerRoute(
        name: "default",
        pattern: "/{controller=Order}/{action=Index}/{id?}");
+
+PACOTES UTILIZADOS NO PROJETO:
+
+ -AutoMapper.Extensions.Microsoft.DependencyInjection;
+ -Microsoft.EntityFrameworkCore
+ -Microsoft.EntityFrameworkCore.Design
+ -Microsoft.EntityFrameworkCore.Tools
+ -Microsoft.VisualStudio.Web.CodeGeneration.Design
+ -Pomelo.EntityFrameworkCore.MySql
