@@ -91,6 +91,7 @@ CONFIGURATIONS:
     }
 
 CONTROLLERS: 
+
  1 - Na pasta controllers possui uma outra pasta Base que contém um BaseController onde está localizado um metódo Alert que dispara um alert bootstrap de sucesso ou erro.
 
  //Método Alert presente no BaseController:
@@ -127,7 +128,7 @@ CONTROLLERS:
        
     }
 
-MAPPERPROFILES: 
+MAPERPROFILES: 
 
 1 - Contem a classe Profiles que herda de Profile do próprio AutoMapper onde são configurados os Maps de uma classe para outra.
 
@@ -155,6 +156,7 @@ SHARED - _LAYOUT:
     }
 
 PROGRAM: 
+
  1 - Adiciona o serviço do autoMapper e indica onde buscar os Maps 
 
  //Adicionado o AutoMapper: 
