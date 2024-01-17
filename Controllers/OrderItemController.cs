@@ -33,7 +33,7 @@ namespace SimpleCRUD_MVC.Controllers
         // GET: OrderItemController/Details/5
         public ActionResult Details(int id)
         {
-            OrderItemOutput output  = _orderItemService.GetById<OrderItemOutput>(x => x.Id == id, x => x.Product, x => x.Order);
+            OrderItemOutput output  = _orderItemService.GetById<OrderItemOutput>(x => x.Id == id, x => x.Product, x => x.Order.Client);
             return View(output);
         }
 
@@ -62,7 +62,7 @@ namespace SimpleCRUD_MVC.Controllers
             {
                 _orderItemService.Add(input);
                 Alert(AlertType.sucess, "Order Item added successfully");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index",new { orderId });
             }
             catch
             {
@@ -74,8 +74,9 @@ namespace SimpleCRUD_MVC.Controllers
         // GET: OrderItemController/Edit/5
         public ActionResult Edit(int id)
         {
-            ViewBag.Products = _productService.GetAll<ProductInput>();
             OrderItemInput input = _orderItemService.GetById<OrderItemInput>(x => x.Id == id, x => x.Product);
+            ProductOutput output = _productService.GetById<ProductOutput>(input.ProductId);
+            ViewBag.Product = output.Name;
             return View(input);
         }
 
@@ -92,7 +93,7 @@ namespace SimpleCRUD_MVC.Controllers
             {
                 _orderItemService.Update(input);
                 Alert(AlertType.sucess, "Order item edited successfully");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { input.OrderId });
             }
             catch
             {
@@ -104,7 +105,7 @@ namespace SimpleCRUD_MVC.Controllers
         // GET: OrderItemController/Delete/5
         public ActionResult Delete(int id)
         {
-            OrderItemOutput output = _orderItemService.GetById<OrderItemOutput>(x => x.Id == id, x => x.Product);
+            OrderItemOutput output = _orderItemService.GetById<OrderItemOutput>(x => x.Id == id, x => x.Product, x => x.Order.Client);
             return View(output);
         }
 
@@ -113,11 +114,12 @@ namespace SimpleCRUD_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, OrderItemOutput output)
         {
+            OrderItemInput order = _orderItemService.GetById<OrderItemInput>(id);
             try
             {
                 _orderItemService.Delete(id);
                 Alert(AlertType.sucess, "Order item deleted successfully");
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", new { order.OrderId });
             }
             catch
             {

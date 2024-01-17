@@ -1,8 +1,5 @@
 ﻿@model IEnumerable<SimpleCRUD_MVC.Business.Models.Output.OrderItemOutput>
 
-<p>
-    <a asp-action="Create" asp-route-orderId="@ViewBag.OrderId"><button class="btn btn-primary">Create New</button></a>
-</p>
 <table class="table">
     <thead>
         <tr>
@@ -44,11 +41,15 @@
                     @Html.DisplayFor(modelItem => item.Quantity)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Edit</button></a> |
-                    <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-primary">Details</button></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-primary">Delete</button></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-warning">Edit</button></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-info">Details</button></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Delete</button></a>
                 </td>
             </tr>
         }
     </tbody>
 </table>
+
+<a asp-action="Create" asp-route-orderId="@ViewBag.OrderId" class="d-grid gap-2"><button class="btn btn-primary">Create new product</button></a>
+<hr />
+<a asp-action="index" asp-controller="Order" asp-route-orderId="@ViewBag.OrderId" class="d-grid gap-2"><button class="btn btn-primary">Back to orders</button></a>

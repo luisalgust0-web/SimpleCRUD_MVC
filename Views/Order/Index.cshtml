@@ -36,9 +36,9 @@
                     <a asp-action="Index" asp-controller="OrderItem" asp-route-orderId="@item.Id"><button class="btn btn-primary">See the products of this order</button></a>
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-primary">Edit</button></a> |
-                    <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-primary">Details</button></a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-primary">Delete</button></a>
+                    <a asp-action="Edit" asp-route-id="@item.Id"><button class="btn btn-warning">Edit</button></a> |
+                    <a asp-action="Details" asp-route-id="@item.Id"><button class="btn btn-info">Details</button></a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id"><button class="btn btn-danger">Delete</button></a>
                 </td>
             </tr>
         }

@@ -10,6 +10,7 @@ namespace SimpleCRUD_MVC.Business.Models.Input
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int? Id { get; set; }
         [DisplayName("Client")]
+        [Required]
         public int ClientId { get; set; }
     }
 }
